@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <title>注册</title>
+  </head>
+  <body>
+    <form action="" id="registerForm">
+      <label for="username"
+        >用户名<input type="text" id="username" name="name"
+      /></label>
+      <label for="password"
+        >密码<input type="text" id="password" name="password"
+      /></label>
+      <button type="submit">注册</button>
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      let $form = $("#registerForm");
+      $form.on("submit", (e) => {
+        e.preventDefault(); // 阻止默认行为，不让它自己提交网页
+        const name = $form.find("input[name=name]").val();
+        const password = $form.find("input[name=password]").val();
+        $.ajax({
+          method: "POST",
+          contentType: "text/json; charset=UTF-8",
+          url: "/register",
+          data: JSON.stringify({ name: name, password: password }),
+        }).then(
+          () => {
+            alert("注册成功");
+            location.href = "/sign_in.html";
+          },
+          () => {}
+        );
+      });
+    </script>
+  </body>
+</html>

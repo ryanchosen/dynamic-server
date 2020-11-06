@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+<body>
+    <form action="" id="signInForm">
+      <label for="username"
+        >用户名<input type="text" id="username" 
+      /></label>
+      <label for="password"
+        >密码<input type="text" id="password" name="password"
+      /></label>
+      <button type="submit">登录</button>
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      let $form = $("#signInForm");
+      $form.on("submit", (e) => {
+        e.preventDefault(); // 阻止默认行为，不让它自己提交网页
+        const name = $form.find("input[name=name]").val();
+        const password = $form.find("input[name=password]").val();
+        $.ajax({
+          method: "POST",
+          contentType: "text/json; charset=UTF-8",
+          url: "/sign_in",
+          data: JSON.stringify({ name: name, password: password }),
+        }).then(
+          () => {
+            alert("登录成功");
+            location.href = "/home.html";
+          },
+          () => {}
+        );
+      });
+    </script>
+  </body>
+</html>
